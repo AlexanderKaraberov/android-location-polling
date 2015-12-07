@@ -4,6 +4,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.Build;
 import android.os.HandlerThread;
+import android.util.Log;
 
 import com.alexander.mobile.locationpolling.application.LocationPollingApplication;
 import com.alexander.mobile.locationpolling.network.APIService;
@@ -24,6 +25,7 @@ public class LocationPollingTask extends HandlerThread {
     public LocationPollingTask(Service service, Intent intent, String name) {
 
         super(name);
+
         this.mServiceContext = service;
         this.mServiceIntent = intent;
 
