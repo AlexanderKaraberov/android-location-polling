@@ -33,12 +33,12 @@ public class MainActivity extends AppCompatActivity {
         mAlarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         mPendingIntent = PendingIntent.getService(this, 0, locationTrackerIntent, 0);
 
-        final long SECOND = 60 * 1000;
-        final long POLLER_PERIOD = 2 * SECOND;
+        final long MINUTE = 60 * 1000;
+        final long POLLING_PERIOD = 2 * MINUTE;
 
         mAlarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
                 SystemClock.elapsedRealtime(),
-                POLLER_PERIOD,
+                POLLING_PERIOD,
                 mPendingIntent);
     }
 
