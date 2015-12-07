@@ -48,7 +48,8 @@ public class UserLocationPollerService extends Service {
                 }
 
                 mLocationManager.removeUpdates(this);
-                final Runnable mRunnableTask = new Runnable() {
+
+                final Runnable locationUpdatesRunnable = new Runnable() {
                     @Override
                     public void run() {
 
@@ -62,7 +63,7 @@ public class UserLocationPollerService extends Service {
                     }
                 };
 
-                mHandler.post(mRunnableTask);
+                mHandler.post(locationUpdatesRunnable);
             }
 
             @Override
