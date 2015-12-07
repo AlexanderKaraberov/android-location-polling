@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">LocationPolling</string>
+    <string name="start_gps">Start Polling Location</string>
+    <string name="stop_gps">Stop Polling Location</string>
+</resources>
