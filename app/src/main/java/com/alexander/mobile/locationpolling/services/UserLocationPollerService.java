@@ -34,17 +34,21 @@ public class UserLocationPollerService extends Service {
         final int userId = intent.getIntExtra("user_id", 0);
 
         final LocationListener locationListener = new LocationListener() {
+
             @Override
             public void onLocationChanged(final Location location) {
 
                 if ( Build.VERSION.SDK_INT >= 23 &&
-                        ContextCompat.checkSelfPermission(UserLocationPollerService.this, android.Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED &&
-                        ContextCompat.checkSelfPermission(UserLocationPollerService.this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                        ContextCompat.checkSelfPermission(UserLocationPollerService.this,
+                                android.Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED &&
+
+                        ContextCompat.checkSelfPermission(UserLocationPollerService.this,
+                                android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED ) {
                     return;
                 }
 
                 mLocationManager.removeUpdates(this);
-                Runnable mRunnableTask = new Runnable() {
+                final Runnable mRunnableTask = new Runnable() {
                     @Override
                     public void run() {
 
@@ -57,6 +61,7 @@ public class UserLocationPollerService extends Service {
                         mPollingTask.updateLocation(request);
                     }
                 };
+
                 mHandler.post(mRunnableTask);
             }
 

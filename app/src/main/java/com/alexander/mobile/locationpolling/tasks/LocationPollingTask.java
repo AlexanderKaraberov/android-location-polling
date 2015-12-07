@@ -4,17 +4,14 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.Build;
 import android.os.HandlerThread;
-import android.util.Log;
 
-import com.alexander.mobile.locationpolling.LocationPollingApplication;
+import com.alexander.mobile.locationpolling.application.LocationPollingApplication;
 import com.alexander.mobile.locationpolling.network.APIService;
 import com.alexander.mobile.locationpolling.network.SendLocationRequest;
 import com.alexander.mobile.locationpolling.receivers.LocationWakefulReceiver;
 
 
 import javax.inject.Inject;
-
-import retrofit.Response;
 
 
 public class LocationPollingTask extends HandlerThread {
@@ -46,7 +43,7 @@ public class LocationPollingTask extends HandlerThread {
     }
 
     public void updateLocation(SendLocationRequest request) {
-        Log.d("TEST TAG: ", "REQUEST" + request.toString() );
+
             mApi.updateLocationSynchronously(request);
             onPostExecute();
     }

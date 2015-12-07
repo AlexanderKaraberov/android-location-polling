@@ -3,6 +3,8 @@ package com.alexander.mobile.locationpolling.network;
 /**
  * Created by alexander on 12/7/15.
  */
+
+//Simple DTO to wrap location update request
 public class SendLocationRequest {
 
     private int userId;
@@ -37,7 +39,7 @@ public class SendLocationRequest {
     public class RequestBuilder {
 
         private RequestBuilder() {
-            // private constructor
+            // private constructor to avoid explicit creation
         }
 
         public RequestBuilder setUserId(int userId) {

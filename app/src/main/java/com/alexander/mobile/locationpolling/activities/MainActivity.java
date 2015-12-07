@@ -24,11 +24,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-
     public void startPolling(View v) {
 
         final Intent locationTrackerIntent = new Intent(this, UserLocationPollerService.class);
-        locationTrackerIntent.putExtra("user_id", 42);
+
+        locationTrackerIntent.putExtra("user_id", 42); //Pass here id of the user to associate location data
 
         mAlarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         mPendingIntent = PendingIntent.getService(this, 0, locationTrackerIntent, 0);

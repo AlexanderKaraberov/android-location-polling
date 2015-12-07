@@ -1,4 +1,4 @@
-package com.alexander.mobile.locationpolling;
+package com.alexander.mobile.locationpolling.application;
 
 import android.app.Application;
 
@@ -22,6 +22,4 @@ public class LocationPollingApplication extends Application {
     public static APIServiceComponent getNetworkComponent() {
         return networkComponent;
     }
-
-
 }
