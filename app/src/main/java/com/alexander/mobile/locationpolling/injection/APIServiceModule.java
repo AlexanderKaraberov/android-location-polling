@@ -21,7 +21,7 @@ public class APIServiceModule {
     APIService provideApiService () {
 
         return new Retrofit.Builder()
-                .baseUrl("http://testservice/")
+                .baseUrl("http://testservice/")   //Insert your service base url (Api endpoint) here
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(APIService.class);
