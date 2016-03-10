@@ -1,5 +1,6 @@
 package com.alexander.mobile.locationpolling.injection;
 
+import com.alexander.mobile.locationpolling.network.APIBaseUrl;
 import com.alexander.mobile.locationpolling.network.APIService;
 
 import javax.inject.Singleton;
@@ -21,7 +22,7 @@ public class APIServiceModule {
     APIService provideApiService () {
 
         return new Retrofit.Builder()
-                .baseUrl("http://testservice/")   //Insert your service base url (Api endpoint) here
+                .baseUrl(new APIBaseUrl())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(APIService.class);

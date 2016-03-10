@@ -21,15 +21,15 @@ public class UserLocationPollerService extends Service {
 
     public static final String LOCATION_POLLING_TASK = "DriverLocationPollingTask";
 
-    private LocationManager mLocationManager;
-    private LocationPollingTask mPollingTask;
-    private Handler mHandler;
+    private LocationManager locationManager;
+    private LocationPollingTask pollingTask;
+    private Handler handler;
 
     @Override
     public int onStartCommand(final Intent intent, int flags, final int startId) {
 
         super.onStartCommand(intent, flags, startId);
-        mLocationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+        locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
 
         final int userId = intent.getIntExtra("user_id", 0);
 
@@ -47,7 +47,7 @@ public class UserLocationPollerService extends Service {
                     return;
                 }
 
-                mLocationManager.removeUpdates(this);
+                locationManager.removeUpdates(this);
 
                 final Runnable locationUpdatesRunnable = new Runnable() {
                     @Override
@@ -59,11 +59,11 @@ public class UserLocationPollerService extends Service {
                                 .setLongtitude(location.getLongitude())
                                 .build();
 
-                        mPollingTask.updateLocation(request);
+                        pollingTask.updateLocation(request);
                     }
                 };
 
-                mHandler.post(locationUpdatesRunnable);
+                handler.post(locationUpdatesRunnable);
             }
 
             @Override
@@ -82,18 +82,18 @@ public class UserLocationPollerService extends Service {
         final Criteria criteria = new Criteria();
         criteria.setHorizontalAccuracy(Criteria.ACCURACY_HIGH);
 
-        mPollingTask = new LocationPollingTask(this, intent, LOCATION_POLLING_TASK);
-        mPollingTask.start();
+        pollingTask = new LocationPollingTask(this, intent, LOCATION_POLLING_TASK);
+        pollingTask.start();
 
-        if (mLocationManager.isProviderEnabled(LocationManager.GPS_PROVIDER ) || mLocationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+        if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER ) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
 
-            mLocationManager.requestLocationUpdates(mLocationManager.getBestProvider(criteria,true),
+            locationManager.requestLocationUpdates(locationManager.getBestProvider(criteria, true),
                     0,
                     0,
-                    locationListener,mPollingTask.getLooper());
+                    locationListener, pollingTask.getLooper());
         }
 
-        mHandler = new Handler(mPollingTask.getLooper());
+        handler = new Handler(pollingTask.getLooper());
 
         return START_REDELIVER_INTENT;
     }

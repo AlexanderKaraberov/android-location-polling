@@ -4,7 +4,6 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.Build;
 import android.os.HandlerThread;
-import android.util.Log;
 
 import com.alexander.mobile.locationpolling.application.LocationPollingApplication;
 import com.alexander.mobile.locationpolling.network.APIService;
@@ -17,25 +16,25 @@ import javax.inject.Inject;
 
 public class LocationPollingTask extends HandlerThread {
 
-    @Inject protected APIService mApi;
+    @Inject protected APIService apiService;
 
-    private final Intent mServiceIntent;
-    private final Service mServiceContext;
+    private final Intent serviceIntent;
+    private final Service serviceContext;
 
     public LocationPollingTask(Service service, Intent intent, String name) {
 
         super(name);
 
-        this.mServiceContext = service;
-        this.mServiceIntent = intent;
+        this.serviceContext = service;
+        this.serviceIntent = intent;
 
         LocationPollingApplication.getNetworkComponent().inject(this);
     }
 
     private void onPostExecute() {
 
-        if (!LocationWakefulReceiver.completeWakefulIntent(mServiceIntent)) {
-            mServiceContext.stopService(mServiceIntent);
+        if (!LocationWakefulReceiver.completeWakefulIntent(serviceIntent)) {
+            serviceContext.stopService(serviceIntent);
         }
 
         if (Build.VERSION.SDK_INT >= 18) {
@@ -46,7 +45,7 @@ public class LocationPollingTask extends HandlerThread {
 
     public void updateLocation(SendLocationRequest request) {
 
-            mApi.updateLocationSynchronously(request);
+            apiService.updateLocationSynchronously(request);
             onPostExecute();
     }
 }

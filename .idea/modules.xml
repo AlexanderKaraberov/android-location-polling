@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/LocationPolling.iml" filepath="$PROJECT_DIR$/LocationPolling.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android-location-polling.iml" filepath="$PROJECT_DIR$/android-location-polling.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
